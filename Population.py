@@ -21,7 +21,7 @@ class Population:
             self.population.append(individual)
 
     def Show(self):
-        print('Current population:\n')
+        print('Current population:\nStrongest: {}'.format(self.Strongest()))
 
         for individual in self.population:
             spaces_1 = ''
@@ -48,25 +48,51 @@ class Population:
 
             print('Fitness: {}{} | Weight: {}{} | Solution: {}'.format(individual.fitness, spaces_1, individual.weight, spaces_2, solution))
 
+        print()
+
     def Evolve(self, **kwargs):
         generations = kwargs["generations"]
         crossover_flag = kwargs["crossover"]
 
         for generation in range(generations):
             self.Procriation()
-            self.SurvivalOfTheFittest()
+            self.Survival_Of_The_Fittest()
 
     def Procriation(self):
-        for individual in self.size/2:
-            ind_1 = random.randint(self.size)
-            ind_2 = random.randint(self.size)
+        for individual in range(int(self.size/2)):
+            ind_1 = random.randint(0, self.size-1)
+            ind_2 = random.randint(0, self.size-1)
 
             while ind_2 == ind_1:
-                ind_2 = random.randint(self.size)
+                ind_2 = random.randint(0, self.size-1)
 
-            newborn = Individual.Birth(self.population[ind_1], self.population[ind_2])
+            newborn = Individual.Birth(self.population[ind_1], self.population[ind_2], self.blocks)
             self.population.append(newborn)
 
     def Survival_Of_The_Fittest(self):
-        pass
+        while len(self.population) > self.size:
+            self.population.pop(self.Weakest())
+
+    def Weakest(self):
+        i = 0
+        weakest = 0
+        fitness = self.population[0].fitness
+
+        for individual in self.population:
+            if individual.fitness < fitness:
+                weakest = i
+
+            i += 1
+
+        return weakest
+
+    def Strongest(self):
+        fitness = self.population[0].fitness
+        strongest = fitness
+
+        for individual in self.population:
+            if individual.fitness > fitness:
+                strongest = individual.fitness
+
+        return strongest
 
