@@ -9,32 +9,53 @@ class Individual:
 
     def Create(self, blocks):
         self.solution.clear()
-        self.fitness = 0
-        self.weight = 0
 
         for block in blocks:
             quantity = random.randint(0, 15)
 
             self.solution.append(quantity)
-            self.fitness += block[0] * quantity
-            self.weight += block[1] * quantity
 
-    @staticmethod
-    def Birth(individual_1, individual_2, blocks):
-        newborn = Individual()
+        self.CorrectFitnessWeight(blocks)
 
+    def Birth(self, individual_1, individual_2, blocks, capacity):
         i = 0
         for block in blocks:
             gene_transfer = random.randint(0, 1)
 
             if gene_transfer == 0:
-                newborn.solution[i] = individual_1.solution[i]
+                self.solution[i] = individual_1.solution[i]
             else:
-                newborn.solution[i] = individual_2.solution[i]
-
-            newborn.fitness += block[0] * newborn.solution[i]
-            newborn.weight += block[1] * newborn.solution[i]
+                self.solution[i] = individual_2.solution[i]
 
             i += 1
 
-        return newborn
+        self.CorrectFitnessWeight(blocks)
+
+        while self.weight > capacity:
+            attribute = random.randint(0, len(blocks) - 1)
+
+            while self.solution[attribute] == 0:
+                attribute = random.randint(0, len(blocks) - 1)
+
+            self.ChangeAttribute(blocks, capacity, attribute, -1)
+
+    def CorrectFitnessWeight(self, blocks):
+        self.fitness = 0
+        self.weight = 0
+
+        i = 0
+        for attribute in self.solution:
+            self.fitness += blocks[i][0] * attribute
+            self.weight += blocks[i][1] * attribute
+
+            i += 1
+
+    def ChangeAttribute(self, blocks, capacity, attribute, number):
+        self.solution[attribute] += number
+
+        self.CorrectFitnessWeight(blocks)
+
+        if self.weight > capacity:
+            self.ChangeAttribute(blocks, capacity, attribute, -1)
+        elif self.solution[attribute] < 0:
+            self.ChangeAttribute(blocks, capacity, attribute, 1)

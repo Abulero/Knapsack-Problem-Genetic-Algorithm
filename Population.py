@@ -8,6 +8,7 @@ class Population:
         self.population = []
         self.blocks = ((1, 1), (2, 1), (2, 2), (4, 12), (10, 4))
         self.capacity = 15
+        self.mutation_chance = 10
 
         self.Generate()
 
@@ -53,9 +54,17 @@ class Population:
     def Evolve(self, **kwargs):
         generations = kwargs["generations"]
         crossover_flag = kwargs["crossover"]
+        mutation_flag = kwargs["mutation"]
 
         for generation in range(generations):
             self.Procriation()
+
+            if mutation_flag:
+                self.Mutation()
+
+            if crossover_flag:
+                self.Crossover()
+
             self.Survival_Of_The_Fittest()
 
     def Procriation(self):
@@ -66,8 +75,26 @@ class Population:
             while ind_2 == ind_1:
                 ind_2 = random.randint(0, self.size-1)
 
-            newborn = Individual.Birth(self.population[ind_1], self.population[ind_2], self.blocks)
+            newborn = Individual()
+            newborn.Birth(self.population[ind_1], self.population[ind_2], self.blocks, self.capacity)
+
             self.population.append(newborn)
+
+    def Mutation(self):
+        for individual in self.population:
+            dice_roll = random.randint(1, 100)
+
+            if dice_roll >= 0 and dice_roll < self.mutation_chance:
+                attribute = random.randint(0, len(self.blocks)-1)
+                change = random.randint(0, 1)
+
+                if change == 0:
+                    individual.ChangeAttribute(self.blocks, self.capacity, attribute, 1)
+                else:
+                    individual.ChangeAttribute(self.blocks, self.capacity, attribute, -1)
+
+    def Crossover(self):
+        pass
 
     def Survival_Of_The_Fittest(self):
         while len(self.population) > self.size:
