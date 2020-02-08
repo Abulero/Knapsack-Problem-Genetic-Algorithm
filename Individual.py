@@ -37,7 +37,7 @@ class Individual:
             while self.solution[attribute] == 0:
                 attribute = random.randint(0, len(blocks) - 1)
 
-            self.ChangeAttribute(blocks, capacity, attribute, -1)
+            self.change_attribute(blocks, capacity, attribute, -1)
 
     def CorrectFitnessWeight(self, blocks):
         self.fitness = 0
@@ -50,12 +50,12 @@ class Individual:
 
             i += 1
 
-    def ChangeAttribute(self, blocks, capacity, attribute, number):
+    def change_attribute(self, blocks, capacity, attribute, number):
         self.solution[attribute] += number
 
         self.CorrectFitnessWeight(blocks)
 
         if self.weight > capacity:
-            self.ChangeAttribute(blocks, capacity, attribute, -1)
+            self.change_attribute(blocks, capacity, attribute, -1)
         elif self.solution[attribute] < 0:
-            self.ChangeAttribute(blocks, capacity, attribute, 1)
+            self.change_attribute(blocks, capacity, attribute, 1)
