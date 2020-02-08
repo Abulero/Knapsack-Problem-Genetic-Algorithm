@@ -5,9 +5,10 @@ import random
 class Population:
     def __init__(self, **kwargs):
         self.size = kwargs["size"]
+        self.capacity = kwargs["knapsack_capacity"]
+        self.blocks = kwargs["blocks"]
+
         self.population = []
-        self.blocks = ((1, 1), (2, 1), (2, 2), (4, 12), (10, 4))
-        self.capacity = 15
         self.mutation_chance = 10
 
         self.generate()
