@@ -12,7 +12,7 @@ Population is a group of individuals, and generations are the iterations of popu
 
 For the purpose of this algorithm, fitness will be the added weight of the blocks inside the knapsack, as it represents how good the solution is.
 
-As for the individuals, each will be a solution to the problem.
+As for the individuals, each will be a solution to the problem and their only constraint will be the weight of their solution.
 
 # How does the playground work?
 You can tinker with the following parameters:
@@ -37,6 +37,3 @@ Without it, the population may lean towards a local peak of fitness, instead of 
 
 Imagine the fitness of an individual is represented by the height of a mountain, as the one above. New generations, thanks to natural selection, tend to reach a peak and not leave it, as either sides of it mean a decrease in fitness. Therefore, it is possible for evolution to drive a species towards a local peak, leaving it oblivious to the higher summit right next to it.
 Mutation allows some individuals to escape the local peak and allow for evolution to find new ones, until it reaches the global apex.
-
-# Crossover
-[COMING SOON]
