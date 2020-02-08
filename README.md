@@ -2,6 +2,7 @@
 Solving the knapsack problem using a very simple genetic algorithm made in python3, allowing for the code to be used as a parameter playground.
 
 ![Fitness Mountain](/images/mountain.jpg)
+<center>(picture from www.pixabay.com)</center>
 
 # Knapsack Problem
 See:
