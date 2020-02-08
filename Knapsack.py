@@ -2,7 +2,7 @@ from Population import Population
 
 
 if __name__ == "__main__":
-    pop = Population(size=100)
-    pop.Show()
-    pop.Evolve(generations=250, mutation=True, crossover=False)
-    pop.Show()
+    pop = Population(size=1000)
+    pop.show()
+    pop.evolve(generations=250, mutation=True)
+    pop.show()

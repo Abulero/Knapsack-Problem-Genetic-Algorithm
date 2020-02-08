@@ -7,7 +7,7 @@ class Individual:
         self.weight = 0
         self.solution = [0, 0, 0, 0, 0]
 
-    def Create(self, blocks):
+    def create(self, blocks):
         self.solution.clear()
 
         for block in blocks:
@@ -15,9 +15,9 @@ class Individual:
 
             self.solution.append(quantity)
 
-        self.CorrectFitnessWeight(blocks)
+        self.correct_fitness_weight(blocks)
 
-    def Birth(self, individual_1, individual_2, blocks, capacity):
+    def birth(self, individual_1, individual_2, blocks, capacity):
         i = 0
         for block in blocks:
             gene_transfer = random.randint(0, 1)
@@ -29,7 +29,7 @@ class Individual:
 
             i += 1
 
-        self.CorrectFitnessWeight(blocks)
+        self.correct_fitness_weight(blocks)
 
         while self.weight > capacity:
             attribute = random.randint(0, len(blocks) - 1)
@@ -37,9 +37,9 @@ class Individual:
             while self.solution[attribute] == 0:
                 attribute = random.randint(0, len(blocks) - 1)
 
-            self.change_attribute(blocks, capacity, attribute, -1)
+            self.change_attribute(blocks, capacity, attribute, -1, once=True)
 
-    def CorrectFitnessWeight(self, blocks):
+    def correct_fitness_weight(self, blocks):
         self.fitness = 0
         self.weight = 0
 
@@ -50,12 +50,15 @@ class Individual:
 
             i += 1
 
-    def change_attribute(self, blocks, capacity, attribute, number):
-        self.solution[attribute] += number
+    def change_attribute(self, blocks, capacity, attribute, number, **kwargs):
+        once = kwargs["once"]
 
-        self.CorrectFitnessWeight(blocks)
+        self.solution[attribute] += number
+        self.correct_fitness_weight(blocks)
 
         if self.weight > capacity:
-            self.change_attribute(blocks, capacity, attribute, -1)
+            if not once:
+                self.change_attribute(blocks, capacity, attribute, -1, once=False)
         elif self.solution[attribute] < 0:
-            self.change_attribute(blocks, capacity, attribute, 1)
+            if not once:
+                self.change_attribute(blocks, capacity, attribute, 1, once=False)

@@ -10,19 +10,19 @@ class Population:
         self.capacity = 15
         self.mutation_chance = 10
 
-        self.Generate()
+        self.generate()
 
-    def Generate(self):
+    def generate(self):
         for pop in range(self.size):
             individual = Individual()
 
             while individual.weight == 0 or individual.weight >= 15:
-                individual.Create(self.blocks)
+                individual.create(self.blocks)
 
             self.population.append(individual)
 
-    def Show(self):
-        print('Current population:\nStrongest: {}'.format(self.Strongest()))
+    def show(self):
+        print('Current population:\nStrongest: {}'.format(self.strongest()))
 
         for individual in self.population:
             spaces_1 = ''
@@ -51,23 +51,19 @@ class Population:
 
         print()
 
-    def Evolve(self, **kwargs):
+    def evolve(self, **kwargs):
         generations = kwargs["generations"]
-        crossover_flag = kwargs["crossover"]
         mutation_flag = kwargs["mutation"]
 
         for generation in range(generations):
-            self.Procriation()
+            self.procriation()
 
             if mutation_flag:
-                self.Mutation()
+                self.mutation()
 
-            if crossover_flag:
-                self.Crossover()
+            self.survival_of_the_fittest()
 
-            self.Survival_Of_The_Fittest()
-
-    def Procriation(self):
+    def procriation(self):
         for individual in range(int(self.size/2)):
             ind_1 = random.randint(0, self.size-1)
             ind_2 = random.randint(0, self.size-1)
@@ -76,11 +72,11 @@ class Population:
                 ind_2 = random.randint(0, self.size-1)
 
             newborn = Individual()
-            newborn.Birth(self.population[ind_1], self.population[ind_2], self.blocks, self.capacity)
+            newborn.birth(self.population[ind_1], self.population[ind_2], self.blocks, self.capacity)
 
             self.population.append(newborn)
 
-    def Mutation(self):
+    def mutation(self):
         for individual in self.population:
             dice_roll = random.randint(1, 100)
 
@@ -89,18 +85,15 @@ class Population:
                 change = random.randint(0, 1)
 
                 if change == 0:
-                    individual.ChangeAttribute(self.blocks, self.capacity, attribute, 1)
+                    individual.change_attribute(self.blocks, self.capacity, attribute, 1, once=False)
                 else:
-                    individual.ChangeAttribute(self.blocks, self.capacity, attribute, -1)
+                    individual.change_attribute(self.blocks, self.capacity, attribute, -1, once=False)
 
-    def Crossover(self):
-        pass
-
-    def Survival_Of_The_Fittest(self):
+    def survival_of_the_fittest(self):
         while len(self.population) > self.size:
-            self.population.pop(self.Weakest())
+            self.population.pop(self.weakest())
 
-    def Weakest(self):
+    def weakest(self):
         i = 0
         weakest = 0
         fitness = self.population[0].fitness
@@ -113,7 +106,7 @@ class Population:
 
         return weakest
 
-    def Strongest(self):
+    def strongest(self):
         fitness = self.population[0].fitness
         strongest = fitness
 
