@@ -18,9 +18,26 @@ As for the individuals, each will be a solution to the problem and their only co
 You can tinker with the following parameters:
 
 Population size
+Knapsack capacity
+Block configuration
 Number of generations
 Mutation (yes or no)
-Crossover (yes or no)
+
+Blocks are described as a tuple of tuples, for instance:
+
+```
+blocks = ((1, 1), (2, 1), (2, 2), (4, 12), (10, 4))
+```
+
+Which would yield the following configuration:
+
+```
+Block 1: $1, 1Kg
+Block 1: $2, 1Kg
+Block 1: $2, 2Kg
+Block 1: $4, 12Kg
+Block 1: $10, 4Kg
+```
 
 It is interesting to use the flags to show how important mutation and crossover are for the population to reach maximum fitness quickly or even at all.
 
