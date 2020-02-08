@@ -1,3 +1,5 @@
+![Fitness Mountain](/images/mountain.jpg)
+
 # Knapsack-Problem-Genetic-Algorithm
 Solving the knapsack problem using a genetic algorithm made in python3, allowing for the code to be used as a simple genetic algorithm playground.
 
