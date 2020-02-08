@@ -20,7 +20,6 @@ Population size and the number of generations with both (each in their own way) 
 Mutation is one of the most importante aspects of the genetic algorithm. Without it, the population may lean towards a local peak of fitness, instead of the global one.
 
 ![GitHub Logo](/images/mountain.png)
-Format: ![Alt Text](url)
 
 # Crossover
 [COMING SOON]
