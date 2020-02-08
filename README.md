@@ -19,7 +19,7 @@ Population size and the number of generations with both (each in their own way) 
 # Mutation
 Mutation is one of the most importante aspects of the genetic algorithm. Without it, the population may lean towards a local peak of fitness, instead of the global one.
 
-![Fitness Mountain](/images/mountain.jpg)
+![Fitness Mountain](/images/mountain_peaks.jpg)
 
 # Crossover
 [COMING SOON]
