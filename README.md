@@ -42,7 +42,7 @@ Block 4: $4, 12Kg
 Block 5: $10, 4Kg
 ```
 
-It is interesting to use the flags to show how important mutation and crossover are for the population to reach maximum fitness quickly or even at all.
+It is interesting to use the mutation flag to show how important it is for the population to reach maximum fitness quickly or even at all.
 
 # Population size and number of generations
 Population size and the number of generations with both (each in their own way) increase the number of gene exchanges, mutations and overall computational time required for the simulation to end. It is imperative for these numbers to be high enough for the population to reach optimal fitness.
