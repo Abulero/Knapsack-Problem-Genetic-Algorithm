@@ -36,10 +36,10 @@ Which would yield the following configuration:
 
 ```
 Block 1: $1, 1Kg
-Block 1: $2, 1Kg
-Block 1: $2, 2Kg
-Block 1: $4, 12Kg
-Block 1: $10, 4Kg
+Block 2: $2, 1Kg
+Block 3: $2, 2Kg
+Block 4: $4, 12Kg
+Block 5: $10, 4Kg
 ```
 
 It is interesting to use the flags to show how important mutation and crossover are for the population to reach maximum fitness quickly or even at all.
