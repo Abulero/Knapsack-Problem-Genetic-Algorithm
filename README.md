@@ -28,13 +28,13 @@ Mutation (yes or no)
 
 Blocks are described as a tuple of tuples, for instance:
 
-```
+```python
 blocks = ((1, 1), (2, 1), (2, 2), (4, 12), (10, 4))
 ```
 
 Which would yield the following configuration:
 
-```
+```python
 Block 1: $1, 1Kg
 Block 2: $2, 1Kg
 Block 3: $2, 2Kg
